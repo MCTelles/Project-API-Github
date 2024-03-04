@@ -28,6 +28,27 @@ export function App() {
     setUsers(formattedData);
   };
 
+  const removeUser = (username: string, indexUser: number) => {
+    const capitalizeUsername =
+      username.charAt(0).toUpperCase() + username.slice(1);
+
+    const messageConfirm = window.confirm(
+      `Você deseja remover o usuário: ${capitalizeUsername}`
+    );
+
+    if (!messageConfirm) {
+      return;
+    }
+
+    const filteredUserByIndex = users.filter((_, index) => index === indexUser);
+
+    const formattedUsers = users.filter(
+      (user) => user !== filteredUserByIndex[0]
+    );
+
+    setUsers(formattedUsers);
+  };
+
   useEffect(() => {
     getContent();
   }, []);
@@ -41,8 +62,15 @@ export function App() {
       </div>
 
       <section className={styles.cardsContainer}>
-        {users.map((user) => (
-          <Profile key={user.id} avatar={user.avatar} nametag={user.name} />
+        {users.map((user, index) => (
+          <Profile
+            key={user.id}
+            index={index}
+            avatar={user.avatar}
+            nametag={user.name}
+            githubUrl={user.githubUrl}
+            removeUser={removeUser}
+          />
         ))}
       </section>
     </main>

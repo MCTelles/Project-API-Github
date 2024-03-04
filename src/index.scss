@@ -6,5 +6,7 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  background: radial-gradient(circle, #081f37, rgba(8, 0, 37) 100%);
+  background-image: url("./assets/backgroundImage.jpg");
+  background-position: center;
+  background-size: cover;
 }
